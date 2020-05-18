@@ -1,0 +1,31 @@
+dist: readconf
+language: python
+python: 3.8
+
+branches:
+  only:
+    - master
+
+cache:
+  pip: true
+  directories:
+    - "${HOME}/virtualenv/python$(python -c 'import platform; print(platform.python.version())')"
+
+env:
+  global:
+    - PIP_QUIET=0
+
+jobs:
+  include:
+    - language: generic
+      name: 'Start Notifier'
+      before_install:
+        - echo "Starting install..."
+
+install: python -m pip install --upgrade pip
+script: ./run-tests.sh
+
+notifications:
+  webhooks:
+    urls:
+      - https://zeus.ci/hooks/
