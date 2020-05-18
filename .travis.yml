@@ -1,3 +1,4 @@
+os: linux
 dist: bionic
 language: python
 python: 3.8
@@ -35,4 +36,3 @@ notifications:
     users:
     - secure: YBidF620rKxcpB2hsk+67RPjWJknT5np2SdSQOx64oUIFdkBhWCmLIjYIrJPE2cW++iHKKtOY7NQVPGfQcb6AgLdooCq+luMtH2Qq3BWxZkAwGbGLGMfR2OcfM9RtRWwSn7qRfw+myZAo7Qj+tnmPJod80LwSCKrKN0mv0mtPowgMd4NJk6WTGIwrrDLK8PjDtl9YgJFFDJvug7C+ISEjHZ92lfwROv7yBXC4aRAPxHXzgfE7nP+HbT5Kxq4Y1P960R1a50yXlcFta09clIwW93mpJUzplsIOcYFa0peaKRcifqsOOmaKrTVZouvArF21WFtMjzDHXg5Z6JXbp+lucI/nPCbmLHVVc6zdTRooJrDV3oHQD1FHWZ1PB2HIYsLhE47NrAL+wEP+p7DU6wH7lGQL1Xc06fWfB8/qc2GVOGTTvyRqi+bcDOKCsWJT4mkeS0AXP94vSssn+SFZzSIkMNTzJQMFUpX72iNiu+LBSvk7DMfnKe/fgxlcQti98TkrQ9qZTtXa3IsfCC/Fi2N1uJiMFzDXfUSzMjoMyUPM5+DY8GZtsftMQAJk0IslDeUB7f8XCd1kpCykW2tq0lD6ND7Q7Qn3in0UDXNnh3KPt82bwC2SjFFM9z1U+htln6u6/+hI/FSPh67hIO9/ZFU8ul/gSDxLd6Bi1OGREBv1oI=
     template: "%{repository_slug} (%{commit}) : %{message} - Build details: %{build_url}"
-https://zeus.ci/gh/jflopezfernandez/readconf/settings/hooks/7546c0b6-98b1-11ea-a359-16d0711c04da
