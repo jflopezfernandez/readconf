@@ -5,6 +5,8 @@ python:
   - "3.7"
   - "3.8"
   - "3.8-dev"
+  - "pypy"
+  - "pypy3"
 
 branches:
   only:
@@ -26,7 +28,7 @@ jobs:
   - language: python
     name: Start Notifier
     before_install:
-    - echo "Starting install..."
+    - echo python$($python -c ())
     install:
       - python -m venv .venv
       - . .venv/bin/activate
@@ -42,9 +44,8 @@ jobs:
           python -m pip install --upgrade codecov
           codecov acceptance
         fi
-
-after_failure:
-  - dmesg | tail -n 100
+    after_failure:
+      - dmesg | tail -n 100
 
 
 notifications:
