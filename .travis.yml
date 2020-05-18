@@ -1,7 +1,12 @@
 os: linux
 dist: bionic
 language: python
-python: 3.8
+python:
+  - "3.5"
+  - "3.6"
+  - "3.7"
+  - "3.8"
+  - "3.8-dev"
 branches:
   only:
   - master
@@ -16,12 +21,16 @@ env:
   - secure: GLixIPLtROGxvW3BynbUJU/rJiFw8R/vleQsmYGEGbc8I9AlSvFa3l0Y4/H0+U4mC4Xzpf9lRfSZM1vp8YiiIgKKv1siSEYS/v52ZquKC9Za/ipqlhok/uGXlT4s4xZptvX3Qqy3V/WBUUrQr7MfzUn55Lc2BPUgCk0wR3MTlXShIHOgtFQMzoIzcFsOU9RLiGqWYSjVjNMy65wfDgAA7LOHkkH/1jajvp7RJVhXlwDt+kZF22e+0u0yKm6nMROUuel1YiCNcWpfiNrArhoLekxijD4WyhNQL3EvhzTiw3WeDHXTCZJ3GlaUcLerjw6MD3vNFW+uR4I23AWwPrsEzrdP6KftYeFRP1t2gkROJMomCUvCq4l7oYNVhOG8I4I5BP0xNIUXYe+zpvSlADibdmNcsR4Mckz1YvyO9tJ238sHK+b79m2raoB764frfhYjigeMYnVRYg/qhy2o2vpb2DeZr3L01soK4JrTz84I8OCIylD5VnGmws8xS9QYbBN4U0Wifr+CyHvq+0wiPFIbLmckDyGe2kR9AlBu3DWyTfQvjXbKswMG3qvsXMgeSSk/vYl4RXa74j0ZOqEJ49JrH6O5aXjJFoBGeCdrGl+rscxUvLWlFpH19DNglCuCJGwTEBwiJnRRhLZM7mYaxCVbtr7r84tLpf4IKwwA7NYYeBs=
 jobs:
   include:
-  - language: generic
+  - language: python
     name: Start Notifier
     before_install:
     - echo "Starting install..."
-    after_install: python -m pip install --upgrade pip
-    script: python -m pytest
+    install:
+      - python -m pip install --upgrade pip
+      - python -m pip install -r requirements.txt
+      - python -m pip install .
+    script:
+      - pytest
 
 notifications:
   email:
