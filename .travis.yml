@@ -2,8 +2,6 @@ os: linux
 dist: bionic
 language: python
 python:
-  - "3.5"
-  - "3.6"
   - "3.7"
   - "3.8"
   - "3.8-dev"
@@ -31,7 +29,7 @@ jobs:
     - echo "Starting install..."
     install:
       - python -m venv --upgrade  .venv
-      - source .venv/bin/activate
+      - . .venv/bin/activate
       - python -m pip install --upgrade pip
       - python -m pip install --requirement requirements.txt
       - python -m pip install .
