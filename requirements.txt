@@ -43,7 +43,7 @@ defusedxml==0.6.0
 dill==0.3.1.1
 distlib==0.3.0
 distutils-pytest==0.1
-Django==2.0.13
+Django==2.2.10
 dnspython==1.16.0
 docgen==0.1.1
 docopt==0.6.2
