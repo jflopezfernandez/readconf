@@ -7,18 +7,22 @@ python:
   - "3.7"
   - "3.8"
   - "3.8-dev"
+
 branches:
   only:
   - master
+
 cache:
   pip: true
   directories:
   - "${HOME}/virtualenv/python$(python -c 'import platform; print(platform.python.version())')"
+
 env:
   global:
   - PIP_QUIET=0
   - secure: n/oCBBW4aagLyoIrrGRqgkpofBjXbH3NjwnBL6GO/0z5S3sKg3jX2socN0JYOkVHY7+zk1859HDbZ+Yf+MOiMSiHftDWTYA8afyAAG8BUOYnyLpW+d6HjxFdHty73OK77oHRGoQsX1+WgUCl3eoQreDv3odm02cptygcaHu7UG1twn0ED19X0Opr9HrW0JGq5M1cDRKP/v87RD9c5kfCoHhuzSo94/a9aVxQcTSapnFxJK4sD7FZmc18GYsGETLS7czIWltn6eoBt2sigm5ACLHejE+bQwzge25CK4XtIVsQPZAb3mlDoqfCnD71LYP1FnRM65eWdXIuWGyDwlSQ9v0vNbYLZDzFXiTLj3g6xLsfeDtr8tqexQXD3RWyjWaaxRwaTNn+fRlPF/oreat5xbzekgYecaxWfJ70i4/P/MMXYoFxEQi/ejdFu+rgWUQaZ9Q/tO5Yq5PCYCrKK7wj6x466SeEbVswSMlMFwbLwq3QfwChVI9Di5kQRsdK+i/jHesiXBz4XQ84r/3IKseX+551ry/DctQ4bZFFYB7XQ/mq/v94f3k9jQ1fcvUd8Lu68nD/YsYE5FYmnYJ2lJwznYy3CzBLl0BskaODTKhX3HlSWzxMD18uV6i8n7YmwiPOvqicZrzBZxdCAJavd34wedNRCfaSBiKgtuv8qtVsiGY=
   - secure: GLixIPLtROGxvW3BynbUJU/rJiFw8R/vleQsmYGEGbc8I9AlSvFa3l0Y4/H0+U4mC4Xzpf9lRfSZM1vp8YiiIgKKv1siSEYS/v52ZquKC9Za/ipqlhok/uGXlT4s4xZptvX3Qqy3V/WBUUrQr7MfzUn55Lc2BPUgCk0wR3MTlXShIHOgtFQMzoIzcFsOU9RLiGqWYSjVjNMy65wfDgAA7LOHkkH/1jajvp7RJVhXlwDt+kZF22e+0u0yKm6nMROUuel1YiCNcWpfiNrArhoLekxijD4WyhNQL3EvhzTiw3WeDHXTCZJ3GlaUcLerjw6MD3vNFW+uR4I23AWwPrsEzrdP6KftYeFRP1t2gkROJMomCUvCq4l7oYNVhOG8I4I5BP0xNIUXYe+zpvSlADibdmNcsR4Mckz1YvyO9tJ238sHK+b79m2raoB764frfhYjigeMYnVRYg/qhy2o2vpb2DeZr3L01soK4JrTz84I8OCIylD5VnGmws8xS9QYbBN4U0Wifr+CyHvq+0wiPFIbLmckDyGe2kR9AlBu3DWyTfQvjXbKswMG3qvsXMgeSSk/vYl4RXa74j0ZOqEJ49JrH6O5aXjJFoBGeCdrGl+rscxUvLWlFpH19DNglCuCJGwTEBwiJnRRhLZM7mYaxCVbtr7r84tLpf4IKwwA7NYYeBs=
+
 jobs:
   include:
   - language: python
@@ -31,6 +35,18 @@ jobs:
       - python -m pip install .
     script:
       - pytest
+    after_script:
+      - |
+        coverage_files=$(ls .artifacts/*coverage.xml || true)
+        if [[ -n "$coverage_files" || -f .artifacts/coverage/cobertura-coverage.xml ]]
+        then
+          python -m pip install --upgrade codecov
+          codecov acceptance
+        fi
+
+after_failure:
+  - dmesg | tail -n 100
+
 
 notifications:
   email:
