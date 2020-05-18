@@ -20,8 +20,9 @@ jobs:
     name: Start Notifier
     before_install:
     - echo "Starting install..."
-install: python -m pip install --upgrade pip
-script: "./run-tests.sh"
+    after_install: python -m pip install --upgrade pip
+    script: python -m pytest
+
 notifications:
   email:
     recipients:
