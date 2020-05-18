@@ -132,3 +132,8 @@ dmypy.json
 # Visual Studio Code
 /.vscode/
 
+# Ignore Ruby Assets
+# 
+# They're required to encrypt 3rd party API information for use with Travis CI.
+/travis-*/
+
